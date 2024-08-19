@@ -1,0 +1,31 @@
+{# templates/admin/admin_base.html.twig #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin Dashboard{% endblock %}</title>
+    {# <link href="{{ asset('build/app.css') }}" rel="stylesheet">
+</head> #}
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-gray-800 text-white flex flex-col">
+            <div class="p-4 text-lg font-semibold">Admin Dashboard</div>
+            <nav class="mt-4 flex-1">
+                <a href="{{ path('admin_dashboard') }}" class="block px-4 py-2 hover:bg-gray-700">Dashboard</a>
+                <a href="{{ path('admin_users') }}" class="block px-4 py-2 hover:bg-gray-700">Users</a>
+                <a href="{{ path('admin_groups') }}" class="block px-4 py-2 hover:bg-gray-700">Groups</a>
+                <a href="{{ path('app_logout') }}" class="block px-4 py-2 hover:bg-gray-700">Logout</a>
+            </nav>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 p-6">
+            {% block body %}
+            <!-- Page-specific content will be injected here -->
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>
