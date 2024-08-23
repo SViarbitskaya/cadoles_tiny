@@ -3,8 +3,12 @@
 {% block title %}Users{% endblock %}
 
 {% block body %}
-    <h1>Users</h1>
-    <pre>
-        {{ dump(users) }}
-    </pre>
+{% for user in users %}
+    <p>{{ user.email }}</p>
+    <p>{{ user.avatar }}</p>
+    {% for group in user.groups %}
+        <p>{{group.name}}</p>
+    {% endfor %}
+{% endfor %}
+
 {% endblock %}
