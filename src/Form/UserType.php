@@ -28,8 +28,9 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'Email',
             ])
-            ->add('password', PasswordType::class, [
-                'label' => 'Password',
+            ->add('plainPassword', PasswordType::class, [
+                'mapped' => false, // Plain password is not mapped to the entity
+                'required' => false, // Not required on edit
             ])
             ->add('roles', ChoiceType::class, [
                 'choices' => $this->getRolesChoices(),
