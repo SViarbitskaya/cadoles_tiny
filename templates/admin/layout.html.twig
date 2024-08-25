@@ -1,31 +1,26 @@
-{# templates/admin/admin_base.html.twig #}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Admin Dashboard{% endblock %}</title>
-    {# <link href="{{ asset('build/app.css') }}" rel="stylesheet">
-</head> #}
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
-    <div class="flex h-screen">
-        <!-- Sidebar -->
-        <div class="w-64 bg-gray-800 text-white flex flex-col">
-            <div class="p-4 text-lg font-semibold">Admin Dashboard</div>
-            <nav class="mt-4 flex-1">
-                <a href="{{ path('admin_dashboard') }}" class="block px-4 py-2 hover:bg-gray-700">Dashboard</a>
-                <a href="{{ path('admin_users') }}" class="block px-4 py-2 hover:bg-gray-700">Users</a>
-                <a href="{{ path('admin_groups') }}" class="block px-4 py-2 hover:bg-gray-700">Groups</a>
-                <a href="{{ path('app_logout') }}" class="block px-4 py-2 hover:bg-gray-700">Logout</a>
-            </nav>
-        </div>
+{#
+   This is the base template of the all backend pages. Since this layout is similar
+   to the global layout, we inherit from it to just change the contents of some
+   blocks. In practice, backend templates are using a three-level inheritance,
+   showing how powerful, yet easy to use, is Twig's inheritance mechanism.
+   See https://symfony.com/doc/current/templates.html#template-inheritance-and-layouts
+#}
+{% extends 'base.html.twig' %}
 
-        <!-- Main Content Area -->
-        <div class="flex-1 p-6">
-            {% block body %}
-            <!-- Page-specific content will be injected here -->
-            {% endblock %}
-        </div>
-    </div>
-</body>
-</html>
+{# {% block importmap %}
+    {{ importmap(['app']) }}
+{% endblock %} 
+#}
+
+{# {% block header_navigation_links %}
+    <li class="nav-item{{ _route in ['admin_dashabord', 'users', 'groups'] ? ' active' : '' }}">
+        <a class="nav-link" href="{{ path('users') }}">
+            <i class="fa fa-list-alt" aria-hidden="true"></i> {{ 'menu.post_list'|trans }}
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('groups') }}">
+            <i class="fa fa-home" aria-hidden="true"></i> {{ 'menu.back_to_blog'|trans }}
+        </a>
+    </li>
+{% endblock %} #}
