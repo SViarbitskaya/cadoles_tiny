@@ -22,8 +22,9 @@ class GroupType extends AbstractType
                 'class' => User::class,
                 'choice_label' => 'email',  // Assuming 'email' is the property used as the user's display label
                 'multiple' => true,
-                'expanded' => true, // Displays as checkboxes if true, otherwise a multi-select dropdown
+                'expanded' => false, // Displays as checkboxes if true, otherwise a multi-select dropdown
                 'label' => 'Users',
+                'required' => false
             ]);
     }
 
