@@ -1,9 +1,9 @@
-{% extends 'admin/layout.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body_id 'admin_group_show' %}
 
 {% block main %}
-<h1>group Details</h1>
+<h1>{{'group_details'|trans}}</h1>
 
     <div class="group-details">
         <table class="table table-striped">
@@ -41,7 +41,7 @@
         </a>
     </div>
 
-    <div class="section">
+    <div class="section mt-2">
         {{ include('admin/group/_delete_group_form.html.twig', {group: group}, with_context = false) }}
     </div>
 

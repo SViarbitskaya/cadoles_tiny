@@ -1,26 +1,51 @@
-{#
-    By default, forms enable client-side validation. This means that you can't
-    test the server-side validation errors from the browser. To temporarily
-    disable this validation, add the 'novalidate' attribute:
-
-    {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
-#}
-
 {% if show_confirmation|default(false) %}
     {% set attr = {'data-confirmation': 'true'} %}
     {{ include('default/_delete_confirmation.html.twig') }}
 {% endif %}
 
-{{ form_start(form, {attr: attr|default({})}) }}
-    {{ form_widget(form) }}
+{{ form_start(form, {attr: {class: 'needs-validation'}, novalidate: 'novalidate'}) }}
 
-    <button type="submit" class="{{ button_css|default("btn btn-primary") }}">
-        <i class="fa fa-save" aria-hidden="true"></i> {{ button_label|default('label.create_post'|trans) }}
-    </button>
+    {# Loop through each form field and apply Bootstrap styling #}
+    {% for field in form %}
+        {% if 'hidden' not in field.vars.block_prefixes %}
+            {% if 'button' in field.vars.block_prefixes %}
+                {# Render submit buttons with Bootstrap button classes #}
+                {{ form_widget(field, {'attr': {'class': 'btn btn-primary'}}) }}
+            {% elseif 'choice' in field.vars.block_prefixes and field.vars.expanded %}
+                {# Customize checkbox/radio button layout #}
+                <div class="mb-3">
+                    {{ form_label(field, null, {'label_attr': {'class': 'form-label'}}) }}
+                    <div class="form-check">
+                        {% for choice in field %}
+                            <div class="form-check form-check-inline">
+                                {{ form_widget(choice, {'attr': {'class': 'form-check-input'}}) }}
+                                {{ form_label(choice, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {{ form_errors(field, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+            {% else %}
+                <div class="mb-3">
+                    {{ form_label(field, null, {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(field, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
 
-    {% if include_back_to_home_link|default(false) %}
-        <a href="{{ path('admin_users') }}" class="btn btn-link">
-            <i class="fa fa-list-alt" aria-hidden="true"></i> {{ 'action.back_to_list'|trans }}
-        </a>
-    {% endif %}
+    {{ form_rest(form) }}
+
+    <div class="mt-2">
+        <button type="submit" class="{{ button_css|default('btn btn-secondary') }}">
+            <i class="fa fa-save" aria-hidden="true"></i> {{ button_label|default('label.create_user'|trans) }}
+        </button>
+    
+        {% if include_back_to_home_link|default(false) %}
+            <a href="{{ path('admin_users') }}" class="btn btn-link">
+                <i class="fa fa-list-alt" aria-hidden="true"></i> {{ 'action.back_to_list'|trans }}
+            </a>
+        {% endif %}
+    </div>
 {{ form_end(form) }}

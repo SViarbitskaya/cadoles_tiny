@@ -1,9 +1,9 @@
-{% extends 'admin/layout.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body_id 'admin_user_show' %}
 
 {% block main %}
-<h1>User Details</h1>
+<h1>{{'user_details'|trans}}</h1>
 
     <div class="user-details">
         <table class="table table-striped">
@@ -61,7 +61,7 @@
         </a>
     </div>
 
-    <div class="section">
+    <div class="section mt-2">
         {{ include('admin/user/_delete_user_form.html.twig', {user: user}, with_context = false) }}
     </div>
 
