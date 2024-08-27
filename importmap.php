@@ -16,11 +16,37 @@ return [
         'path' => 'app.js',
         'entrypoint' => true,
     ],
-    'bootstrap' => [
-        'version' => '5.3.3',
+    'admin' => [
+        'path' => 'admin.js',
+        'entrypoint' => true,
     ],
-    '@popperjs/core' => [
-        'version' => '2.11.8',
+    'jquery' => [
+        'version' => '3.7.1',
+    ],
+    'popper.js' => [
+        'version' => '1.16.1',
+    ],
+    // 'bootstrap' => [
+    //     'version' => '5.3.3',
+    // ],
+    'bootstrap/js/dist/alert' => [
+        'version' => '4.6.2',
+    ],
+    'bootstrap/js/dist/collapse' => [
+        'version' => '4.6.2',
+    ],
+    'bootstrap/js/dist/dropdown' => [
+        'version' => '4.6.2',
+    ],
+    'bootstrap/js/dist/tab' => [
+        'version' => '4.6.2',
+    ],
+    'bootstrap/js/dist/modal' => [
+        'version' => '4.6.2',
+    ],
+    '@fortawesome/fontawesome-free/css/all.css' => [
+        'version' => '6.5.1',
+        'type' => 'css',
     ],
     'bootstrap/dist/css/bootstrap.min.css' => [
         'version' => '5.3.3',

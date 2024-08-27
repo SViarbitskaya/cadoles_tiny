@@ -37,6 +37,14 @@
         <source>action.show_user</source>
         <target>show</target>
       </trans-unit>
+      <trans-unit id="QKBGMmx" resname="user_details">
+        <source>user_details</source>
+        <target>User Details</target>
+      </trans-unit>
+      <trans-unit id="mC5.kkJ" resname="group_details">
+        <source>group_details</source>
+        <target>Group Details</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

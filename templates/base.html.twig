@@ -13,7 +13,7 @@
             {% endblock %}
         {% block javascripts %}
             {% block importmap %}
-                {{ importmap('app') }}
+                {{ importmap(['app', 'admin']) }}
             {% endblock %}
             {# <script src="{{asset('app.js')}}"></script> #}
             <script defer src="https://kit.fontawesome.com/5a377fab5b.js" crossorigin="anonymous"></script>
