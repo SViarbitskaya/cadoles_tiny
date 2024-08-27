@@ -45,6 +45,10 @@
         <source>group_details</source>
         <target>Group Details</target>
       </trans-unit>
+      <trans-unit id="ekFnrEE" resname="delete_user">
+        <source>delete_user</source>
+        <target>Delete user</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
