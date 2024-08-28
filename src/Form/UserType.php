@@ -13,6 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\PasswordStrength;
 
 class UserType extends AbstractType
 {
@@ -31,6 +34,14 @@ class UserType extends AbstractType
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false, // Plain password is not mapped to the entity
                 'required' => false, // Not required on edit
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Choose a password!'
+                    ]),
+                    new PasswordStrength([
+                        'message' => 'Your password is too easy to guess. Company\'s security policy requires to use a stronger password.'
+                    ])
+                ]
             ])
             ->add('roles', ChoiceType::class, [
                 'choices' => $this->getRolesChoices(),
