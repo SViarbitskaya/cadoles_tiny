@@ -34,32 +34,48 @@ class UserController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user)
+
+        // Define the validation group
+        $validationGroups = ['create']; // Example: use 'create' group for new user creation
+
+        $form = $this->createForm(UserType::class, $user, [])
             ->add('saveAndCreateNew', SubmitType::class);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Hash the password before saving the user
-            $hashedPassword = $passwordHasher->hashPassword($user, $form->get('plainPassword')->getData());
-            $user->setPassword($hashedPassword);
 
-            $entityManager->persist($user);
-            $entityManager->flush();
 
-            /** @var SubmitButton $submit */
-            $submit = $form->get('saveAndCreateNew');
+        if ($form->isSubmitted()) {
 
-            if ($submit->isClicked()) {
-                return $this->redirectToRoute('admin_user_new', [], Response::HTTP_SEE_OTHER);
+            // Manually set the plain password in the entity before validating
+            $plainPassword = $form->get('plainPassword')->getData();
+            if ($plainPassword) {
+                $user->setPlainPassword($plainPassword);
             }
 
-            return $this->redirectToRoute('admin_users', [], Response::HTTP_SEE_OTHER);
+            if ($form->isValid()) {
+
+                // Hash the password before saving the user
+                $hashedPassword = $passwordHasher->hashPassword($user, $user->getPlainPassword());
+                $user->setPassword($hashedPassword);
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                /** @var SubmitButton $submit */
+                $submit = $form->get('saveAndCreateNew');
+
+                if ($submit->isClicked()) {
+                    return $this->redirectToRoute('admin_user_new', [], Response::HTTP_SEE_OTHER);
+                }
+
+                return $this->redirectToRoute('admin_users', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->render('admin/user/new.html.twig', [
             'user' => $user,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
