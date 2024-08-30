@@ -26,9 +26,6 @@ return [
     'popper.js' => [
         'version' => '1.16.1',
     ],
-    // 'bootstrap' => [
-    //     'version' => '5.3.3',
-    // ],
     'bootstrap/js/dist/alert' => [
         'version' => '4.6.2',
     ],
@@ -50,6 +47,19 @@ return [
     ],
     'bootstrap/dist/css/bootstrap.min.css' => [
         'version' => '5.3.3',
+        'type' => 'css',
+    ],
+    'datatables' => [
+        'version' => '1.10.18',
+    ],
+    'datatables.net-dt' => [
+        'version' => '2.1.4',
+    ],
+    'datatables.net' => [
+        'version' => '2.1.4',
+    ],
+    'datatables.net-dt/css/dataTables.dataTables.min.css' => [
+        'version' => '2.1.4',
         'type' => 'css',
     ],
 ];

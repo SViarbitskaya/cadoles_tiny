@@ -1,38 +1,24 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.dataTables.css" />
+{% endblock %}
+
 {% block body_id 'admin_groups' %}
 
 {% block main %}
     <h1>User Groups</h1>
 
-    <table class="table table-striped table-middle-aligned table-borderless">
+    <table id="datatable-groups" class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th scope="col"></i>Name</th>
-                <th scope="col"><i class="fa fa-cogs" aria-hidden="true"></i>Actions</th>
+                <th scope="col">Name</th>
+                <th scope="col"><i class="fa fa-cogs" aria-hidden="true"></i> Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for group in groups %}
-            <tr>
-                <td>{{ group.name }}</td>
-                <td class="text-right">
-                    <div class="item-actions">
-                        <a href="{{ path('admin_group_show', {id: group.id}) }}" class="btn btn-sm btn-secondary">
-                            <i class="fa fa-eye" aria-hidden="true"></i> show
-                        </a>
-
-                        <a href="{{ path('admin_group_edit', {id: group.id}) }}" class="btn btn-sm btn-primary">
-                            <i class="fa fa-edit" aria-hidden="true"></i> edit
-                        </a>
-                    </div>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4" align="center">No groups found</td>
-           </tr>
-        {% endfor %}
+            <!-- DataTables will automatically fill this tbody with data from the server -->
         </tbody>
     </table>
 {% endblock %}

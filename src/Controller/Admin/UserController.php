@@ -21,12 +21,9 @@ class UserController extends AbstractController
     #[Route('/users', name: 'admin_users', methods: ['GET'])]
     public function users(UserRepository $userRepository): Response
     {
-        // Fetch the list of users from the database
-        $users = $userRepository->findAll();
-
-        // Render the template and pass the list of users to it
+        // Render the template, no need to pass users
         return $this->render('admin/user/list.html.twig', [
-            'users' => $users,
+            'ajaxUrl' => $this->generateUrl('users_data'),  // Pass the AJAX URL for the DataTables
         ]);
     }
 
