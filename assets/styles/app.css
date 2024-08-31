@@ -1,0 +1,10 @@
+body {
+    background-color: white;
+    font-family: 'Inter Variable', sans-serif;
+}
+
+.navbar-nav .nav-item.active .nav-link,
+.nav-link.active {
+    text-decoration: underline;
+}
+

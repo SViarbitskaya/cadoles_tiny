@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="2lspxnT" resname="label.create_user">
+        <source>label.create_user</source>
+        <target>Create user</target>
+      </trans-unit>
+      <trans-unit id="CLaU8ID" resname="action.back_to_list">
+        <source>action.back_to_list</source>
+        <target>Back to list</target>
+      </trans-unit>
+      <trans-unit id="R4TrJ5q" resname="title.edit_user">
+        <source>title.edit_user</source>
+        <target>Edit user</target>
+      </trans-unit>
+      <trans-unit id="80bO76v" resname="action.save">
+        <source>action.save</source>
+        <target>Save</target>
+      </trans-unit>
+      <trans-unit id="ZQKVhdH" resname="action.show_group">
+        <source>action.show_group</source>
+        <target>show</target>
+      </trans-unit>
+      <trans-unit id="rTRL4fL" resname="label.create_group">
+        <source>label.create_group</source>
+        <target>Create group</target>
+      </trans-unit>
+      <trans-unit id="PO_UHtX" resname="action.close">
+        <source>action.close</source>
+        <target>close</target>
+      </trans-unit>
+      <trans-unit id="mIcBLr3" resname="action.show_user">
+        <source>action.show_user</source>
+        <target>show</target>
+      </trans-unit>
+      <trans-unit id="QKBGMmx" resname="user_details">
+        <source>user_details</source>
+        <target>User Details</target>
+      </trans-unit>
+      <trans-unit id="mC5.kkJ" resname="group_details">
+        <source>group_details</source>
+        <target>Group Details</target>
+      </trans-unit>
+      <trans-unit id="ekFnrEE" resname="delete_user">
+        <source>delete_user</source>
+        <target>Delete user</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

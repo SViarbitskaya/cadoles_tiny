@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'admin_group_show' %}
+
+{% block main %}
+<h1>{{'group_details'|trans}}</h1>
+
+    <div class="group-details">
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <td>{{ group.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ group.name }}</td>
+            </tr>
+            <tr>
+                <th>Users</th>
+                <td>
+                    {% if group.users is not empty %}
+                        <ul>
+                            {% for user in group.users %}
+                                <li>{{ user.email }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <span class="text-muted">No users assigned</span>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+    </div>
+
+{% endblock %}
+
+{% block sidebar %}
+    <div class="section">
+        <a href="{{ path('admin_group_edit', {id: group.id}) }}" class="btn btn-lg btn-block btn-success">
+            <i class="fa fa-edit" aria-hidden="true"></i> Edit group
+        </a>
+    </div>
+
+    <div class="section mt-2">
+        {{ include('admin/group/_delete_group_form.html.twig', {group: group}, with_context = false) }}
+    </div>
+
+    {{ parent() }}
+{% endblock %}

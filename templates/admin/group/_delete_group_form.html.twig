@@ -1,0 +1,8 @@
+{{ include('default/_delete_confirmation.html.twig') }}
+<form action="{{ url('admin_group_delete', {id: group.id}) }}" method="post" data-confirmation="true" id="delete-form">
+    <input type="hidden" name="token" value="{{ csrf_token('delete') }}" />
+    <button type="submit" class="btn btn-block btn-danger">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        Delete group
+    </button>
+</form>

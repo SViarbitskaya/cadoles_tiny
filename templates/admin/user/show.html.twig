@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'admin_user_show' %}
+
+{% block main %}
+<h1>{{'user_details'|trans}}</h1>
+
+    <div class="user-details">
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>
+                    {% for role in user.roles %}
+                        <span class="badge bg-info">{{ role }}</span>
+                    {% else %}
+                        <span class="text-muted">No roles assigned</span>
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Avatar</th>
+                <td>
+                    {% if user.avatar %}
+                        <img src="{{ asset('uploads/avatars/' ~ user.avatar) }}" alt="User Avatar" class="img-thumbnail" width="100">
+                    {% else %}
+                        <span class="text-muted">No avatar uploaded</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Groups</th>
+                <td>
+                    {% if user.groups is not empty %}
+                        <ul>
+                            {% for group in user.groups %}
+                                <li>{{ group.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <span class="text-muted">No groups assigned</span>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+    </div>
+
+{% endblock %}
+
+{% block sidebar %}
+    <div class="section">
+        <a href="{{ path('admin_user_edit', {id: user.id}) }}" class="btn btn-lg btn-block btn-success">
+            <i class="fa fa-edit" aria-hidden="true"></i> Edit User
+        </a>
+    </div>
+
+    <div class="section mt-2">
+        {{ include('admin/user/_delete_user_form.html.twig', {user: user}, with_context = false) }}
+    </div>
+
+    {{ parent() }}
+{% endblock %}
+
+

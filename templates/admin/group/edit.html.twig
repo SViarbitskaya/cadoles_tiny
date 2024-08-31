@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'admin_group_edit' %}
+
+{% block body %}
+    {# <h1>{{ 'title.edit_post'|trans({'id': group.id}) }}</h1> #}
+
+    {{ include('admin/group/_form.html.twig', {
+        form: form,
+        button_label: 'action.save'|trans,
+        include_back_to_home_link: true,
+    }, with_context = false) }}
+{% endblock %}
+
+{% block sidebar %}
+    <div class="section">
+        <a href="{{ path('admin_post_show', {id: group.id}) }}" class="btn btn-lg btn-block btn-success">
+            <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show_group'|trans }}
+        </a>
+    </div>
+
+    <div class="section actions">
+        {{ include('admin/blog/_delete_form.html.twig', {group: group}, with_context = false) }}
+    </div>
+
+    {{ parent() }}
+
+{% endblock %}
