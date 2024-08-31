@@ -28,8 +28,9 @@ COPY . /var/www/html
 # Modify Apache configuration to set the DocumentRoot to /public
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-# Install Symfony dependencies
-RUN composer install --no-scripts --no-autoloader
+# Install Symfony dependencies including symfony/runtime
+RUN composer require symfony/runtime
+RUN composer install
 
 # Set appropriate permissions for the cache and log directories
 RUN mkdir -p var/cache var/logs var/sessions var/storage \
@@ -43,12 +44,9 @@ RUN a2enmod rewrite && service apache2 restart
 EXPOSE 80
 
 # Clear the project cache and compile the assets
-RUN php bin/console cache:clear --no-warmup && \
-    php bin/console cache:warmup && \
-    php bin/console importmap:install
-    # php bin/console assets:install && \
-    # php bin/console asset-map:compile \
-
+RUN php bin/console cache:clear
+RUN php bin/console cache:warmup
+RUN php bin/console importmap:install
 
 # Start Apache in the foreground
 CMD ["apache2-foreground"]
