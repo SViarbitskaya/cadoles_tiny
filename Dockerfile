@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN composer clear-cache
 
 # Set the working directory
 WORKDIR /var/www/html
@@ -28,9 +29,10 @@ COPY . /var/www/html
 # Modify Apache configuration to set the DocumentRoot to /public
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-# Install Symfony dependencies including symfony/runtime
-RUN composer require symfony/runtime
-RUN composer install
+# # Install Symfony dependencies including symfony/runtime
+# # RUN composer require symfony/runtime
+# COPY composer.json composer.lock /var/www/html/
+# RUN composer install --optimize-autoloader
 
 # Set appropriate permissions for the cache and log directories
 RUN mkdir -p var/cache var/logs var/sessions var/storage \
