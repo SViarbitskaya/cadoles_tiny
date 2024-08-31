@@ -2,31 +2,31 @@
 
 ## Setup and Installation
 
-1. Build the Docker Images:
-   docker-compose build --no-cache
+1. Build the Docker Images
+   `docker-compose build --no-cache`
 
-2. Start the Application:
-   docker-compose up -d
+3. Start the Application
+   `docker-compose up -d`
 
-3. Install PHP Dependencies:
-   docker-compose exec app composer install
+4. Install PHP Dependencies
+   vdocker-compose exec app composer install`
 
-4. Run Database Migrations:
-   docker-compose exec app php bin/console doctrine:migrations:migrate
+5. Run Database Migrations
+   `docker-compose exec app php bin/console doctrine:migrations:migrate`
 
-5. Create an Admin User:
-   docker-compose exec app php bin/console app:create-admin-user admin@contact.com admin
+6. Create an Admin User
+   `docker-compose exec app php bin/console app:create-admin-user admin@contact.com admin`
 
 ## Stopping and Cleaning Up
 
-1. Stop the Containers:
-   docker-compose stop
+1. Stop the Containers
+   `docker-compose stop`
 
-2. Bring Down the Containers:
-   docker-compose down
+2. Bring Down the Containers
+   `docker-compose down`
 
-3. Bring Down and Remove Volumes:
-   docker-compose down --volumes
+3. Bring Down and Remove Volumes
+   `docker-compose down --volumes`
 
 ## Additional Notes
 
