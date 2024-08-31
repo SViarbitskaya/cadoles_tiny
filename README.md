@@ -9,7 +9,7 @@
    `docker-compose up -d`
 
 4. Install PHP Dependencies
-   vdocker-compose exec app composer install`
+   `docker-compose exec app composer install`
 
 5. Run Database Migrations
    `docker-compose exec app php bin/console doctrine:migrations:migrate`
