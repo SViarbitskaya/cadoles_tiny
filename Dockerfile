@@ -45,9 +45,10 @@ EXPOSE 80
 # Clear the project cache and compile the assets
 RUN php bin/console cache:clear --no-warmup && \
     php bin/console cache:warmup && \
-    php bin/console importmap:install && \
-    php bin/console assets:install && \
-    php bin/console asset-map:compile
+    php bin/console importmap:install
+    # php bin/console assets:install && \
+    # php bin/console asset-map:compile \
+
 
 # Start Apache in the foreground
 CMD ["apache2-foreground"]
