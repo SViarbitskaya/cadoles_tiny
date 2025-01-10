@@ -35,3 +35,7 @@
 - For development, you might prefer running `docker-compose up` without `-d` to view logs in the terminal.
 - You can test the app by loging in as an admin using email: admin@contact.com and password "admin".
 - This application is configured for development purposes. Additional steps and configurations are required to prepare it for a production environment.
+
+## Features
+
+
