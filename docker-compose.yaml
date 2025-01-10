@@ -14,6 +14,8 @@ services:
       start_period: 60s
     volumes:
       - database_data:/var/lib/postgresql/data:rw
+    networks:
+      - app_network
   ###< doctrine/doctrine-bundle ###
 
   app:
@@ -28,9 +30,15 @@ services:
       - .:/var/www/html
     ports:
       - "8000:80"
+    networks:
+      - app_network
 
 volumes:
   ###> doctrine/doctrine-bundle ###
   database_data:
   ###< doctrine/doctrine-bundle ###
+
+networks:
+  app_network:
+    driver: bridge
 
