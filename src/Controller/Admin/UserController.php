@@ -10,12 +10,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/admin')]
-#[IsGranted(User::ROLE_ADMIN)]
+#[IsGranted('ROLE_ADMIN')]
 class UserController extends AbstractController
 {
     #[Route('/users', name: 'admin_users', methods: ['GET'])]
@@ -32,29 +33,22 @@ class UserController extends AbstractController
     {
         $user = new User();
 
-        // Define the validation group
-        $validationGroups = ['create']; // Example: use 'create' group for new user creation
-
-        $form = $this->createForm(UserType::class, $user, [])
+        $form = $this->createForm(UserType::class, $user, ['validation_groups' => ['Default', 'creation']])
             ->add('saveAndCreateNew', SubmitType::class);
 
         $form->handleRequest($request);
 
-
-
         if ($form->isSubmitted()) {
-
-            // Manually set the plain password in the entity before validating
-            $plainPassword = $form->get('plainPassword')->getData();
-            if ($plainPassword) {
-                $user->setPlainPassword($plainPassword);
-            }
 
             if ($form->isValid()) {
 
-                // Hash the password before saving the user
-                $hashedPassword = $passwordHasher->hashPassword($user, $user->getPlainPassword());
-                $user->setPassword($hashedPassword);
+                $plainPassword = $form->get('plainPassword')->getData();
+                
+                if ($plainPassword) {
+                    $user->setPlainPassword($plainPassword);
+                    $hashedPassword = $passwordHasher->hashPassword($user, $user->getPlainPassword());
+                    $user->setPassword($hashedPassword);
+                }
 
                 $entityManager->persist($user);
                 $entityManager->flush();
@@ -79,7 +73,6 @@ class UserController extends AbstractController
     #[Route('/user/{id}', name: 'admin_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
-        // Render the template and pass the user to it
         return $this->render('admin/user/show.html.twig', [
             'user' => $user,
         ]);
@@ -88,7 +81,7 @@ class UserController extends AbstractController
     #[Route('/user/{id}/edit', name: 'admin_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, ['validation_groups' => ['Default', 'update']]);
 
         $form->handleRequest($request);
 
