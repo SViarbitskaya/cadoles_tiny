@@ -62,10 +62,12 @@
 
 ### Styling:
 
+   - Uses `importmap` for handling assets
    - Uses Bootstrap for user interface styling.
+   - Usese Datatables to handle tabulated data.
 
 ### Docker Setup:
 
-   - Application runs inside Docker containers together with PostgreSQL as the database.
+   - Application can run inside Docker containers together with PostgreSQL as the database.
 
 

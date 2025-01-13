@@ -34,13 +34,18 @@ class UserType extends AbstractType
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false, // Plain password is not mapped to the entity
                 'required' => false, // Not required on edit
+                'attr'=> [
+                    'placeholder' => 'Leave blank to keep the current password (update only)'
+                ],
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Choose a password!'
-                    ]),
                     new PasswordStrength([
-                        'message' => 'Your password is too easy to guess. Company\'s security policy requires to use a stronger password.'
-                    ])
+                        'message' => 'Your password is too easy to guess. Company\'s security policy requires to use a stronger password.',
+                        'groups' => ['update', 'creation'],
+                    ]),
+                    new NotBlank([
+                        'message' => 'Password is required.',
+                        'groups' => ['creation'],
+                    ]),
                 ]
             ])
             ->add('roles', ChoiceType::class, [

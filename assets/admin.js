@@ -35,8 +35,8 @@ $(document).ready( function () {
             },
             {
                 data: "groups",
-                orderable: false,
-                searchable: false,
+                orderable: true,
+                searchable: true,
                 render: function(data) {
                     return data.map(function(group) {
                         return '<span class="badge bg-secondary">' + group.name + '</span>';
@@ -45,8 +45,8 @@ $(document).ready( function () {
             },
             {
                 data: "roles",
-                orderable: false,
-                searchable: false,
+                orderable: true,
+                searchable: true,
                 render: function(data) {
                     return data.map(function(role) {
                         return '<span class="badge bg-primary">' + role + '</span>';
