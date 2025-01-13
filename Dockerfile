@@ -16,6 +16,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_pgsql gd zip \
     && docker-php-ext-install intl
     
+# Allow Composer to run as root (superuser)
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
