@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6ebc74d61bc298db896cf5bcafb2fba",
+    "content-hash": "0ecc2d2c78215490b76a3ab342d56d3f",
     "packages": [
         {
             "name": "composer/semver",
@@ -1309,6 +1309,58 @@
                 "source": "https://github.com/doctrine/sql-formatter/tree/1.4.1"
             },
             "time": "2024-08-05T20:32:22+00:00"
+        },
+        {
+            "name": "php-cs-fixer/shim",
+            "version": "v3.68.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-CS-Fixer/shim.git",
+                "reference": "eca7a809b6b5d35d0a033c63a14881107e22a7b6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/eca7a809b6b5d35d0a033c63a14881107e22a7b6",
+                "reference": "eca7a809b6b5d35d0a033c63a14881107e22a7b6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-tokenizer": "*",
+                "php": "^7.4 || ^8.0"
+            },
+            "replace": {
+                "friendsofphp/php-cs-fixer": "self.version"
+            },
+            "suggest": {
+                "ext-dom": "For handling output formats in XML",
+                "ext-mbstring": "For handling non-UTF8 characters."
+            },
+            "bin": [
+                "php-cs-fixer",
+                "php-cs-fixer.phar"
+            ],
+            "type": "application",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Dariusz Rumiński",
+                    "email": "dariusz.ruminski@gmail.com"
+                }
+            ],
+            "description": "A tool to automatically fix PHP code style",
+            "support": {
+                "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.68.1"
+            },
+            "time": "2025-01-17T09:21:08+00:00"
         },
         {
             "name": "psr/cache",

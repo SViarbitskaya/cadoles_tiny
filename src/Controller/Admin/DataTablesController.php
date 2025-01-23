@@ -1,13 +1,13 @@
 <?php
+
 namespace App\Controller\Admin;
 
+use App\Repository\GroupRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use App\Repository\UserRepository;
-use App\Repository\GroupRepository;
 
 class DataTablesController extends AbstractController
 {
@@ -32,7 +32,7 @@ class DataTablesController extends AbstractController
 
         if (!empty($search)) {
             $queryBuilder->andWhere('u.email LIKE :search')
-                        ->setParameter('search', '%' . $search["value"] . '%');
+                        ->setParameter('search', '%'.$search['value'].'%');
         }
 
         $totalFilteredRecords = $queryBuilder->select('COUNT(u.id)')
@@ -45,7 +45,7 @@ class DataTablesController extends AbstractController
             $columnDir = $order[0]['dir'];
             $columnName = $columns[$columnIndex]['data']; // Get the column name based on the index
 
-            $queryBuilder->orderBy('u.' . $columnName, $columnDir);
+            $queryBuilder->orderBy('u.'.$columnName, $columnDir);
         }
 
         $data = $queryBuilder->select('u.id, u.email, u.roles')
@@ -93,7 +93,6 @@ class DataTablesController extends AbstractController
         ]);
     }
 
-
     #[Route('/admin/groups/data', name: 'groups_data', methods: ['GET'])]
     public function groupsData(Request $request, GroupRepository $groupRepository): JsonResponse
     {
@@ -115,7 +114,7 @@ class DataTablesController extends AbstractController
 
         if (!empty($search)) {
             $queryBuilder->andWhere('g.name LIKE :search')
-                        ->setParameter('search', '%' . $search["value"] . '%');
+                        ->setParameter('search', '%'.$search['value'].'%');
         }
 
         $totalFilteredRecords = $queryBuilder->select('COUNT(g.id)')
@@ -128,7 +127,7 @@ class DataTablesController extends AbstractController
             $columnDir = $order[0]['dir'];
             $columnName = $columns[$columnIndex]['data']; // Get the column name based on the index
 
-            $queryBuilder->orderBy('g.' . $columnName, $columnDir);
+            $queryBuilder->orderBy('g.'.$columnName, $columnDir);
         }
 
         $data = $queryBuilder->select('g.id, g.name')

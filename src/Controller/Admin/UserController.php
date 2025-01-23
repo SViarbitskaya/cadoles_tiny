@@ -7,13 +7,13 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Symfony\Component\Form\SubmitButton;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/admin')]
 #[IsGranted('ROLE_ADMIN')]
@@ -39,11 +39,9 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-
             if ($form->isValid()) {
-
                 $plainPassword = $form->get('plainPassword')->getData();
-                
+
                 if ($plainPassword) {
                     $user->setPlainPassword($plainPassword);
                     $hashedPassword = $passwordHasher->hashPassword($user, $user->getPlainPassword());
@@ -86,13 +84,12 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             // Hash the password if it's changed
             if ($form->get('plainPassword')->getData()) {
                 $hashedPassword = $passwordHasher->hashPassword($user, $form->get('plainPassword')->getData());
                 $user->setPassword($hashedPassword);
             }
-            
+
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_user_edit', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
