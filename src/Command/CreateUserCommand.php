@@ -17,10 +17,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
     hidden: false,
     aliases: ['app:add-admin-user']
 )]
-
 class CreateUserCommand extends Command
 {
-
     public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)
     {
         $this->entityManager = $entityManager;
@@ -50,6 +48,7 @@ class CreateUserCommand extends Command
         $this->entityManager->flush();
 
         $output->writeln('Admin user successfully created!');
+
         return Command::SUCCESS;
 
         // or return this if some error happened during the execution
@@ -70,6 +69,5 @@ class CreateUserCommand extends Command
             ->setHelp('This command allows you to create a new admin user.')
             ->addArgument('email', InputArgument::REQUIRED, 'The email of the new admin')
             ->addArgument('password', InputArgument::REQUIRED, 'The password of the new admin');
-        ;
     }
 }

@@ -24,7 +24,7 @@ class GroupType extends AbstractType
                 'multiple' => true,
                 'expanded' => false, // Displays as checkboxes if true, otherwise a multi-select dropdown
                 'label' => 'Users',
-                'required' => false
+                'required' => false,
             ]);
     }
 

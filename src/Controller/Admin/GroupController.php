@@ -7,11 +7,11 @@ use App\Form\GroupType;
 use App\Repository\GroupRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 #[IsGranted('ROLE_ADMIN')]
 class GroupController extends AbstractController
@@ -38,15 +38,14 @@ class GroupController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Persist the selected users to the group
+            foreach ($group->getUsers() as $user) {
+                $user->addGroup($group);
+                $entityManager->persist($user);
+            }
 
-        // Persist the selected users to the group
-        foreach ($group->getUsers() as $user) {
-            $user->addGroup($group);
-            $entityManager->persist($user);
-        }
-
-        $entityManager->persist($group);
-        $entityManager->flush();
+            $entityManager->persist($group);
+            $entityManager->flush();
             $entityManager->persist($group);
             $entityManager->flush();
 

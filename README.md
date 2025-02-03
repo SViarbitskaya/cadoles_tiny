@@ -30,9 +30,11 @@
 - Adjust environment variables in `.env` and configuration settings in `docker-compose.yml` as needed.
 - For development, you might prefer running `docker-compose up` without `-d` to view logs in the terminal.
 - You can test the app by loging in as an admin using email: admin@contact.com and password "admin".
-- This application is configured for development purposes. Additional steps and configurations are required to prepare it for a production environment.
+- This application is configured for development purposes. Additional steps and configurations are required to prepare it for a production environment (adjusting environmental variables, compiling assets with assets mapper, adjusting docker configuration, etc.)
 
 ## Features
+
+Symfony 7.1.x
 
 ### User Management:
 

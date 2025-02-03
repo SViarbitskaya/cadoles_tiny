@@ -4,22 +4,21 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\Group;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Validator\Constraints\PasswordStrength;
+use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 
 class UserType extends AbstractType
 {
-
+    private $roleHierarchy;
+    
     public function __construct(RoleHierarchyInterface $roleHierarchy)
     {
         $this->roleHierarchy = $roleHierarchy;
@@ -34,8 +33,8 @@ class UserType extends AbstractType
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false, // Plain password is not mapped to the entity
                 'required' => false, // Not required on edit
-                'attr'=> [
-                    'placeholder' => 'Leave blank to keep the current password (update only)'
+                'attr' => [
+                    'placeholder' => 'Leave blank to keep the current password (update only)',
                 ],
                 'constraints' => [
                     new PasswordStrength([
@@ -46,7 +45,7 @@ class UserType extends AbstractType
                         'message' => 'Password is required.',
                         'groups' => ['creation'],
                     ]),
-                ]
+                ],
             ])
             ->add('roles', ChoiceType::class, [
                 'choices' => $this->getRolesChoices(),
@@ -61,14 +60,14 @@ class UserType extends AbstractType
                 'expanded' => true, // Displays as checkboxes if true, otherwise a multi-select dropdown
                 'label' => 'Groups',
             ])
-            ;
+        ;
     }
 
     private function getRolesChoices(): array
     {
         // Get all roles from the role hierarchy
         $allRoles = $this->roleHierarchy->getReachableRoleNames(['ROLE_ADMIN']);
-        
+
         // Generate a choices array with the role as both label and value
         $choices = [];
         foreach ($allRoles as $role) {
